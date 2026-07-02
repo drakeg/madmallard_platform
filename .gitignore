@@ -1,0 +1,11 @@
+.env
+*.sqlite3
+__pycache__/
+*.pyc
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+.DS_Store
+node_modules/
+app/staticfiles/

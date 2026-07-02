@@ -1,0 +1,15 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ tenant.public_name }}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body class="theme-{{ tenant.theme_key|default:'default' }}">
+  <main class="site-shell">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

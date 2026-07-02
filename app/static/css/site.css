@@ -1,0 +1,17 @@
+:root { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body { margin: 0; min-height: 100vh; }
+.site-shell { min-height: 100vh; padding: 4rem 1.5rem; box-sizing: border-box; }
+.hero { max-width: 960px; margin: 0 auto; padding: 3rem; border-radius: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.18); }
+.hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: .95; margin: 0 0 1rem; }
+.hero p { font-size: 1.25rem; max-width: 680px; }
+.actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.btn { padding: .85rem 1.1rem; border-radius: 999px; text-decoration: none; font-weight: 700; display: inline-block; }
+.theme-adventures { background: linear-gradient(135deg, #172554, #0f766e 55%, #f59e0b); color: white; }
+.theme-adventures .hero { background: rgba(255,255,255,.12); backdrop-filter: blur(6px); }
+.theme-adventures .btn { background: #fef3c7; color: #172554; }
+.theme-personal_training { background: #f8fafc; color: #111827; }
+.theme-personal_training .hero { background: white; border-left: 12px solid #16a34a; }
+.theme-personal_training .btn { background: #16a34a; color: white; }
+.theme-solutions { background: #020617; color: #dbeafe; }
+.theme-solutions .hero { background: #0f172a; border: 1px solid #334155; }
+.theme-solutions .btn { background: #38bdf8; color: #020617; }
