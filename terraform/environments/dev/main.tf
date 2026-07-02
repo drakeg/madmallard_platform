@@ -37,3 +37,10 @@ module "ec2" {
   primary_domain        = var.primary_domain
   additional_domains    = var.additional_domains
 }
+
+
+module "ssm" {
+  source           = "../../modules/ssm"
+  name             = var.name
+  security_profile = var.security_profile
+}

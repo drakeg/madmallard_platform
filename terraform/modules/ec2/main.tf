@@ -158,7 +158,9 @@ SITE
 #!/bin/bash
 set -eux
 apt-get update
-apt-get install -y ca-certificates curl gnupg git awscli
+apt-get install -y ca-certificates curl gnupg git awscli snapd
+snap install amazon-ssm-agent --classic || true
+systemctl enable --now snap.amazon-ssm-agent.amazon-ssm-agent.service || systemctl enable --now amazon-ssm-agent || true
 # Ensure stale packages from earlier bootstrap attempts do not keep serving the default page.
 if systemctl list-unit-files | grep -q "^nginx.service"; then
   systemctl stop nginx || true
@@ -196,7 +198,8 @@ EOF2
 #!/bin/bash
 set -eux
 dnf update -y
-dnf install -y docker git awscli
+dnf install -y docker git awscli amazon-ssm-agent
+systemctl enable --now amazon-ssm-agent || true
 # Ensure stale packages from earlier bootstrap attempts do not keep serving the default page.
 if systemctl list-unit-files | grep -q "^nginx.service"; then
   systemctl stop nginx || true
@@ -258,6 +261,7 @@ resource "aws_instance" "web" {
     WebServer           = var.web_server
     CertificateProvider = var.certificate_provider
     ManagedBy           = "terraform"
+    MadMallardPlatform = "true"
   }
 }
 

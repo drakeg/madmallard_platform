@@ -65,3 +65,15 @@ variable "additional_domains" {
   default     = []
   description = "Additional public domains for separate business identities."
 }
+
+
+variable "security_profile" {
+  type        = string
+  default     = "standard"
+  description = "SSM-applied EC2 security baseline. Supported: minimal, standard, hardened."
+
+  validation {
+    condition     = contains(["minimal", "standard", "hardened"], var.security_profile)
+    error_message = "security_profile must be one of: minimal, standard, hardened."
+  }
+}

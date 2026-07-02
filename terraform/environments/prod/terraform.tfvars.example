@@ -42,3 +42,14 @@ additional_domains = [
   # "madmallardpersonaltraining.com",
   # "madmallardsolutions.com",
 ]
+
+
+# EC2 hardening applied through AWS Systems Manager State Manager.
+# Supported: minimal, standard, hardened
+# standard installs/configures fail2ban, firewall, automatic security updates,
+# SSH hardening, Docker log rotation, logrotate, audit basics, and an audit script.
+security_profile = "standard"
+
+# Test URL example:
+# primary_domain = "pill.madmallards.com"
+# Then add an A record at your DNS provider pointing pill.madmallards.com to the EC2 public IP.
