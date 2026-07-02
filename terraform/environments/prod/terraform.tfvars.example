@@ -1,7 +1,7 @@
 # Copy this file to terraform.tfvars and update values.
 
 aws_region = "us-east-1"
-name       = "madmallard-dev"
+name       = "madmallard-prod"
 
 # Cheapest/free-tier-friendly default for many AWS accounts.
 # Change to t2.micro if your account/region free tier specifically supports that instead.
