@@ -34,3 +34,34 @@ variable "instance_type" {
   type    = string
   default = "t3.micro"
 }
+
+
+variable "web_server" {
+  type        = string
+  default     = "caddy"
+  description = "Reverse proxy profile. Supported: caddy, nginx."
+}
+
+variable "certificate_provider" {
+  type        = string
+  default     = "letsencrypt"
+  description = "TLS provider profile. Supported: letsencrypt, aws-acm-acme, none."
+}
+
+variable "acme_email" {
+  type        = string
+  default     = ""
+  description = "Email address for ACME certificate registration."
+}
+
+variable "primary_domain" {
+  type        = string
+  default     = ""
+  description = "Primary public domain. Leave blank until DNS points to the EC2 public IP."
+}
+
+variable "additional_domains" {
+  type        = list(string)
+  default     = []
+  description = "Additional public domains for separate business identities."
+}

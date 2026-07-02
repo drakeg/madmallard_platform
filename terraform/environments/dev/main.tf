@@ -31,4 +31,9 @@ module "ec2" {
   security_group_ids    = [module.security.web_sg_id]
   public_key            = var.public_key
   instance_profile_name = module.iam.instance_profile_name
+  web_server            = var.web_server
+  certificate_provider  = var.certificate_provider
+  acme_email            = var.acme_email
+  primary_domain        = var.primary_domain
+  additional_domains    = var.additional_domains
 }

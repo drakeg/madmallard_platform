@@ -1,0 +1,15 @@
+{
+    email you@example.com
+}
+
+madmallardsadventures.com {
+    reverse_proxy 127.0.0.1:8000
+}
+
+madmallardpersonaltraining.com {
+    reverse_proxy 127.0.0.1:8000
+}
+
+madmallardsolutions.com {
+    reverse_proxy 127.0.0.1:8000
+}

@@ -22,3 +22,23 @@ ssh_cidr = "YOUR_PUBLIC_IP/32"
 # Example:
 # public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... greg@macbook"
 public_key = "YOUR_SSH_PUBLIC_KEY_CONTENTS"
+
+
+# Deployment profile
+# Cheapest/simplest bootstrap: caddy + letsencrypt.
+# Supported web_server values: caddy, nginx
+# Supported certificate_provider values: letsencrypt, aws-acm-acme, none
+web_server           = "caddy"
+certificate_provider = "letsencrypt"
+
+# Recommended for ACME registrations. Leave blank only for temporary/IP-only testing.
+acme_email = "you@example.com"
+
+# Leave these blank until your external DNS A records point to the EC2 public IP.
+# Once DNS is pointed correctly, set these and re-apply Terraform to generate the Caddyfile.
+primary_domain = ""
+additional_domains = [
+  # "madmallardsadventures.com",
+  # "madmallardpersonaltraining.com",
+  # "madmallardsolutions.com",
+]

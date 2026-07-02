@@ -23,7 +23,7 @@ AWS
 ├── Security group
 ├── EC2 instance
 │   ├── Docker
-│   ├── Nginx
+│   ├── Caddy by default, or Nginx by profile
 │   ├── Django
 │   └── SQLite initially
 ├── S3 assets/backups bucket
@@ -44,9 +44,10 @@ Free Tier eligible account:
 | EBS gp3 20GB | Root disk | ~$1.60–$2.00 |
 | S3 | Backups/assets | <$1 initially |
 | Data transfer | Light traffic | Usually <$1 initially |
-| Route 53 | DNS, when added | ~$0.50/hosted zone |
+| External DNS | Already owned/managed outside AWS | $0 additional |
+| Caddy + Let's Encrypt | HTTPS certificates/renewal | $0 |
 
-Estimated starting total: **$0–5/month if EC2 Free Tier applies**, or roughly **$10–15/month without Free Tier**.
+Estimated starting total: **$0–4/month if EC2 Free Tier applies**, or roughly **$9–14/month without Free Tier**. External domain registration/DNS costs are excluded because you already manage those outside AWS.
 
 ---
 
@@ -58,12 +59,60 @@ terraform/modules/          Reusable Terraform modules
 terraform/environments/dev/ Dev environment
 terraform/environments/prod/ Prod environment placeholder
 scripts/                   Deploy/backup helper scripts
-deploy/nginx/              Nginx config
+deploy/caddy/              Caddy config examples
+deploy/nginx/              Optional Nginx config
 .github/workflows/         CI validation
 Makefile                   Root-level helper commands
 ```
 
 ---
+
+## TLS and DNS profile
+
+Your DNS can stay outside Route 53. Terraform creates the EC2 instance and outputs its public IP; you then create/update A records at your existing DNS provider.
+
+Default low-cost profile:
+
+```hcl
+web_server           = "caddy"
+certificate_provider = "letsencrypt"
+```
+
+This is the cheapest and simplest approach:
+
+- Caddy terminates HTTPS on the EC2 instance.
+- Caddy automatically requests and renews Let's Encrypt certificates.
+- No Route 53 hosted zone is required.
+- No ALB or CloudFront is required.
+
+Example domain settings once DNS points to the EC2 public IP:
+
+```hcl
+acme_email    = "you@example.com"
+primary_domain = "madmallardsadventures.com"
+additional_domains = [
+  "madmallardpersonaltraining.com",
+  "madmallardsolutions.com",
+]
+```
+
+Temporary first boot is also supported with no domains:
+
+```hcl
+primary_domain     = ""
+additional_domains = []
+```
+
+In that mode Caddy listens on HTTP port 80 only and proxies to Django. After DNS is ready, set the domains and re-apply Terraform.
+
+AWS ACM ACME/exportable certificate support is represented as a deployment profile for future use:
+
+```hcl
+web_server           = "nginx"
+certificate_provider = "aws-acm-acme"
+```
+
+For now, the repo documents this path in `docs/tls-profiles.md` but keeps Caddy + Let's Encrypt as the working default because it is free and simpler for a single EC2 bootstrap deployment.
 
 ## SSH key configuration
 
@@ -245,6 +294,8 @@ Set:
 - `public_key`
 - `ami_family` or optional pinned `ami_id`
 - `instance_type`
+- `web_server` / `certificate_provider`
+- `primary_domain` / `additional_domains` after DNS is pointed
 
 4. Initialize Terraform:
 
@@ -323,13 +374,14 @@ git push -u origin main
 Recommended before treating this as production:
 
 1. Add Terraform remote state in S3 with DynamoDB locking.
-2. Add domain/Route 53 module.
+2. Add optional Route 53 module only if you ever move DNS into AWS.
 3. Add CloudFront only when traffic or caching needs justify it.
 4. Add SES for separate business email identities.
 5. Add automatic EC2 deploy from GitHub Actions.
 6. Add encrypted app secrets via SSM Parameter Store.
 7. Add scheduled SQLite backups to S3.
 8. Add optional ARM64 AMI lookup for Graviton/t4g instances.
+9. Wire the optional AWS ACM ACME/exportable certificate profile if/when central AWS certificate management is worth the added cost.
 
 ---
 
@@ -356,3 +408,29 @@ Separate publicly:
 - email from/reply-to identity
 - analytics views
 - customer-facing navigation
+
+
+## Note about seeing the default Nginx page
+
+If the public IP shows `Welcome to nginx!`, the EC2 instance was likely created with an older bootstrap script or with `web_server = "nginx"` at creation time. EC2 user-data only runs during first boot, so changing Terraform variables later may require replacing the instance.
+
+Check the selected profile:
+
+```bash
+make tf-output ENV=prod
+```
+
+For the bootstrap deployment, expected values are:
+
+```text
+web_server = caddy
+certificate_provider = letsencrypt
+```
+
+If this is a fresh, disposable bootstrap instance, replace it:
+
+```bash
+make tf-apply ENV=prod
+```
+
+This version sets `user_data_replace_on_change = true`, so bootstrap/profile changes will recreate the EC2 instance automatically.
