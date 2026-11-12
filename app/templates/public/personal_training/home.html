@@ -1,9 +1,17 @@
 {% extends "base_public.html" %}
 {% block content %}
-<section class="hero">
-  <h1>Mad Mallard Personal Training</h1>
-  <p>{{ tenant.tagline }}</p>
-  <p>Fitness business placeholder: services, client intake, programs, nutrition resources, and coaching dashboard.</p>
-  <div class="actions"><a class="btn" href="#">View services</a><a class="btn" href="#">Start coaching</a></div>
+<section class="hero hero-split" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="eyebrow-line"></span> MADE FOR REAL LIFE</p>
+    <h1 id="hero-title">Strong starts <em>here.</em></h1>
+    <p class="lead">Practical training. Sustainable habits. A healthier you, on your terms.</p>
+    <div class="actions"><a class="btn btn-primary" href="#explore">Explore our approach <span aria-hidden="true">↗</span></a><a class="btn btn-secondary" href="#about">Why we do it <span aria-hidden="true">↓</span></a></div>
+    <div class="hero-meta"><span class="meta-dot"></span> Training <span class="meta-separator">/</span> Consistency <span class="meta-separator">/</span> Progress</div>
+  </div>
+  <div class="hero-art art-training" aria-hidden="true"><span class="training-ring ring-one"></span><span class="training-ring ring-two"></span><div class="training-word">MOVE<span>.</span><br>BUILD<span>.</span><br>REPEAT<span>.</span></div><div class="art-caption"><span>01 / 03</span><strong>Progress over perfection.</strong></div></div>
 </section>
+<section class="content-section" id="explore" aria-labelledby="explore-title"><div class="section-heading"><p class="eyebrow">A BETTER WAY FORWARD</p><h2 id="explore-title">Fitness that <em>fits.</em></h2><p>No magic shortcuts. Just sound fundamentals and a plan you can live with.</p></div>
+<div class="feature-grid"><article class="feature-card"><span class="feature-number">01 /</span><span class="feature-symbol" aria-hidden="true">↗</span><h3>Strength &amp; movement</h3><p>Build confidence with a thoughtful approach to resistance training, movement, and recovery.</p></article><article class="feature-card"><span class="feature-number">02 /</span><span class="feature-symbol" aria-hidden="true">◎</span><h3>Healthy habits</h3><p>Focus on repeatable choices around activity, nutrition, and the routines that matter.</p></article><article class="feature-card"><span class="feature-number">03 /</span><span class="feature-symbol" aria-hidden="true">✳</span><h3>Long-term progress</h3><p>Track meaningful improvements and build momentum without chasing quick fixes.</p></article></div></section>
+<section class="statement" id="about"><span class="eyebrow">OUR PHILOSOPHY</span><h2>Consistency beats <em>intensity.</em></h2><p>Progress comes from showing up, making manageable changes, and keeping at it. We're building resources around that idea.</p></section>
+<section class="connect-panel" id="connect"><div><p class="eyebrow">WHAT'S NEXT</p><h2>Coaching resources are taking shape.</h2><p>We're developing training and wellness content. Individual coaching enrollment isn't open on this preview yet.</p></div><a class="btn btn-primary" href="#explore">See the focus areas ↑</a></section>
 {% endblock %}

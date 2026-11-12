@@ -4,12 +4,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{{ tenant.public_name }}{% endblock %}</title>
+  <meta name="description" content="{{ tenant.tagline|default:'Explore the Mad Mallard family of businesses.' }}">
+  <meta name="theme-color" content="#101b2d">
+  <title>{% block title %}{{ tenant.public_name|default:"Mad Mallard" }}{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/site.css' %}">
 </head>
 <body class="theme-{{ tenant.theme_key|default:'default' }}">
-  <main class="site-shell">
-    {% block content %}{% endblock %}
-  </main>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-frame">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="{{ tenant.public_name|default:'Mad Mallard' }} home">
+        <span class="brand-mark" aria-hidden="true">MM<span class="brand-dot">.</span></span>
+        <span class="brand-name">{{ tenant.public_name|default:"Mad Mallard" }}</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#explore">Explore</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="#connect">Connect <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main" class="site-shell">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+      <span class="footer-brand">{{ tenant.public_name|default:"Mad Mallard" }}</span>
+      <span>Built for what's next.</span>
+      <a href="#main">Back to top ↑</a>
+    </footer>
+  </div>
 </body>
 </html>

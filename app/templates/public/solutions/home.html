@@ -1,9 +1,17 @@
 {% extends "base_public.html" %}
 {% block content %}
-<section class="hero">
-  <h1>Mad Mallard Solutions</h1>
-  <p>{{ tenant.tagline }}</p>
-  <p>IT services placeholder: cloud consulting, Linux operations, automation, DevOps, and technical project pages.</p>
-  <div class="actions"><a class="btn" href="#">Services</a><a class="btn" href="#">Contact</a></div>
+<section class="hero hero-split" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="eyebrow-line"></span> BUILD SMARTER. OPERATE BETTER.</p>
+    <h1 id="hero-title">Technology, <em>simplified.</em></h1>
+    <p class="lead">Cloud infrastructure, automation, and practical engineering for the work that matters.</p>
+    <div class="actions"><a class="btn btn-primary" href="#explore">Explore our expertise <span aria-hidden="true">↗</span></a><a class="btn btn-secondary" href="#about">Our approach <span aria-hidden="true">↓</span></a></div>
+    <div class="hero-meta"><span class="meta-dot"></span> Cloud <span class="meta-separator">/</span> Automation <span class="meta-separator">/</span> Reliability</div>
+  </div>
+  <div class="hero-art art-solutions" aria-hidden="true"><div class="terminal"><div class="terminal-dots"><i></i><i></i><i></i></div><div class="terminal-lines"><span>$ build --better</span><span>✓ infrastructure ready</span><span>✓ workflows automated</span><span class="terminal-cursor">_</span></div></div><div class="art-caption"><span>01 / 03</span><strong>Make complexity manageable.</strong></div></div>
 </section>
+<section class="content-section" id="explore" aria-labelledby="explore-title"><div class="section-heading"><p class="eyebrow">FOCUS AREAS</p><h2 id="explore-title">Built for the <em>real world.</em></h2><p>Thoughtful technical foundations that are secure, maintainable, and ready to grow.</p></div>
+<div class="feature-grid"><article class="feature-card"><span class="feature-number">01 /</span><span class="feature-symbol" aria-hidden="true">◇</span><h3>Cloud &amp; infrastructure</h3><p>Practical cloud architecture, infrastructure as code, and platforms designed for maintainability.</p></article><article class="feature-card"><span class="feature-number">02 /</span><span class="feature-symbol" aria-hidden="true">⌘</span><h3>Automation &amp; DevOps</h3><p>Reduce repetitive work with reliable deployment pipelines, infrastructure automation, and tooling.</p></article><article class="feature-card"><span class="feature-number">03 /</span><span class="feature-symbol" aria-hidden="true">◎</span><h3>Operations &amp; reliability</h3><p>Observability, operational consistency, and dependable systems that help teams focus.</p></article></div></section>
+<section class="statement" id="about"><span class="eyebrow">HOW WE THINK</span><h2>Less overhead.<br><em>More momentum.</em></h2><p>Technology should solve problems — not create more of them. We favor clear decisions, useful automation, and systems people can operate.</p></section>
+<section class="connect-panel" id="connect"><div><p class="eyebrow">BUILDING THE FOUNDATION</p><h2>Good systems start with a plan.</h2><p>This is a preview of the future Solutions website. The service inquiry flow is not live yet.</p></div><a class="btn btn-primary" href="#explore">Review focus areas ↑</a></section>
 {% endblock %}

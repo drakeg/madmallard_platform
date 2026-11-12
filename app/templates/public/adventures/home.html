@@ -1,9 +1,29 @@
 {% extends "base_public.html" %}
 {% block content %}
-<section class="hero">
-  <h1>Mad Mallards Adventures</h1>
-  <p>{{ tenant.tagline }}</p>
-  <p>Creator hub placeholder: videos, affiliate gear, sponsor media kit, RV resources, and travel content.</p>
-  <div class="actions"><a class="btn" href="#">Watch latest</a><a class="btn" href="#">Gear we use</a></div>
+<section class="hero hero-split" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="eyebrow-line"></span> THE ROAD IS CALLING</p>
+    <h1 id="hero-title">Find your <em>next</em> adventure.</h1>
+    <p class="lead">Real RV life. Unexpected stops. Good food and great stories along the way.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#explore">Explore the journey <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-secondary" href="https://www.youtube.com/@MadMallardsAdventures" target="_blank" rel="noopener noreferrer">Our YouTube channel <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="hero-meta"><span class="meta-dot"></span> RV travel <span class="meta-separator">/</span> Experiences <span class="meta-separator">/</span> The open road</div>
+  </div>
+  <div class="hero-art art-adventures" aria-hidden="true">
+    <span class="sun"></span><span class="hill hill-back"></span><span class="hill hill-front"></span>
+    <div class="art-caption"><span>01 / 03</span><strong>Take the scenic route.</strong></div>
+  </div>
 </section>
+<section class="content-section" id="explore" aria-labelledby="explore-title">
+  <div class="section-heading"><p class="eyebrow">FOLLOW YOUR CURIOSITY</p><h2 id="explore-title">A little bit of <em>everything.</em></h2><p>From the destination to the detour, we make room for the memorable moments.</p></div>
+  <div class="feature-grid">
+    <article class="feature-card"><span class="feature-number">01 /</span><span class="feature-symbol" aria-hidden="true">⌁</span><h3>Life on the road</h3><p>RV adventures, campsite discoveries, and the everyday reality of traveling with a fifth wheel.</p></article>
+    <article class="feature-card"><span class="feature-number">02 /</span><span class="feature-symbol" aria-hidden="true">✳</span><h3>Places &amp; experiences</h3><p>Hidden gems, history, breathtaking views, and places worth going a little out of the way for.</p></article>
+    <article class="feature-card"><span class="feature-number">03 /</span><span class="feature-symbol" aria-hidden="true">◈</span><h3>Gear &amp; good eats</h3><p>Practical travel gear, memorable bites, and lessons learned while exploring.</p></article>
+  </div>
+</section>
+<section class="statement" id="about"><span class="eyebrow">THE MALLARD WAY</span><h2>Less rushing.<br><em>More experiencing.</em></h2><p>We're sharing the journey as it happens — the highlights, the hiccups, and everything in between.</p></section>
+<section class="connect-panel" id="connect"><div><p class="eyebrow">COME ALONG</p><h2>There's always another road.</h2><p>Follow our latest travels and find inspiration for your next stop.</p></div><a class="btn btn-primary" href="https://www.youtube.com/@MadMallardsAdventures" target="_blank" rel="noopener noreferrer">Watch our adventures ↗</a></section>
 {% endblock %}
