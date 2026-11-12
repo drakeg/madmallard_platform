@@ -13,14 +13,14 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="page-frame">
     <header class="site-header">
-      <a class="brand" href="/" aria-label="{{ tenant.public_name|default:'Mad Mallard' }} home">
+      <a class="brand" href="{% url 'home' %}{{ tenant_preview_query }}" aria-label="{{ tenant.public_name|default:'Mad Mallard' }} home">
         <span class="brand-mark" aria-hidden="true">MM<span class="brand-dot">.</span></span>
         <span class="brand-name">{{ tenant.public_name|default:"Mad Mallard" }}</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="#explore">Explore</a>
-        <a href="#about">About</a>
-        <a class="nav-cta" href="#connect">Connect <span aria-hidden="true">↗</span></a>
+        <a href="{% url 'page_index' %}{{ tenant_preview_query }}">Pages</a>
+        <a href="{% url 'home' %}{{ tenant_preview_query }}#about">About</a>
+        <a class="nav-cta" href="{% url 'home' %}{{ tenant_preview_query }}#connect">Connect <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
     <main id="main" class="site-shell">
