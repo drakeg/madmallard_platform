@@ -222,7 +222,7 @@ resource "aws_ssm_association" "security_baseline" {
     values = [var.target_tag_value]
   }
 
-  association_name = "${var.name}-security-baseline"
+  association_name   = "${var.name}-security-baseline"
   compliance_severity = var.security_profile == "hardened" ? "HIGH" : "MEDIUM"
 }
 
