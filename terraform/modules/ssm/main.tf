@@ -181,7 +181,7 @@ mainSteps:
             sed -i 's/^apply_updates.*/apply_updates = yes/' /etc/dnf/automatic.conf || true
             systemctl enable --now dnf-automatic.timer || true
           else
-            echo "Unsupported OS ID=$ID ID_LIKE=$ID_LIKE" >&2
+            echo "Unsupported OS ID=$ID" >&2
             exit 1
           fi
 
