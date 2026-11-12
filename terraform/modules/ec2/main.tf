@@ -256,12 +256,12 @@ resource "aws_instance" "web" {
   user_data_replace_on_change = true
 
   tags = {
-    Name       = "${var.name}-web"
+    Name                = "${var.name}-web"
     AmiFamily           = var.ami_family
     WebServer           = var.web_server
     CertificateProvider = var.certificate_provider
     ManagedBy           = "terraform"
-    MadMallardPlatform = "true"
+    MadMallardPlatform  = "true"
   }
 }
 
