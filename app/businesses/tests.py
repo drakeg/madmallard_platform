@@ -5,6 +5,7 @@ from businesses.middleware import TenantMiddleware
 from businesses.models import Business, Domain
 
 
+@override_settings(ALLOWED_HOSTS=[".example.com"])
 class TenantMiddlewareTests(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
