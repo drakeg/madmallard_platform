@@ -6,7 +6,7 @@ The platform is a shared engine. Public brands are isolated by hostname, theme, 
 
 ## Tenant Resolution
 
-1. Query parameter override for local development: `?tenant=adventures`.
+1. Query parameter override **only with `DJANGO_DEBUG=True`** for local development: `?tenant=adventures`. In production it is ignored to prevent URL parameters from switching a visitor between tenants.
 2. Hostname lookup in the `Domain` table.
 3. Fallback tenant from `DEFAULT_TENANT_SLUG`.
 

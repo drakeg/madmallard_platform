@@ -8,7 +8,8 @@ class TenantMiddleware:
     def __call__(self, request):
         tenant = None
         host = request.get_host().split(":")[0].lower()
-        slug_override = request.GET.get("tenant")
+        # Query-string tenant selection is strictly a local development aid.
+        slug_override = request.GET.get("tenant") if settings.DEBUG else None
         if slug_override:
             tenant = Business.objects.filter(slug=slug_override, is_active=True).first()
         if tenant is None:
