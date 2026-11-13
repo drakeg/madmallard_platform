@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 class Business(models.Model):
@@ -20,3 +21,24 @@ class Domain(models.Model):
 
     def __str__(self):
         return self.hostname
+
+
+class BusinessMembership(models.Model):
+    """Explicit assignment permitting an editor to work on one business."""
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="business_memberships"
+    )
+    business = models.ForeignKey(
+        Business, on_delete=models.CASCADE, related_name="memberships"
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "business"], name="unique_business_membership"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.user} — {self.business}"
