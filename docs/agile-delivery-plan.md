@@ -62,10 +62,10 @@ Future sprint scope and calendar must be reconfirmed after each review. Holiday 
 | --- | --- | --- | --- | --- |
 | TEN-01 | P0 | 2 | Done (PR #3) | Hostname resolves active tenant; query override development-only; tests cover fallback and inactive tenant |
 | WEB-01 | P1 | 5 | In Review (PR #10) | Responsive, branded landing pages for all three sites; no false live-service claims |
-| TEN-02 | P0 | 3 | In Review (current PR) | Page detail is filtered by both current tenant and publication status; foreign/unpublished slugs return 404 |
-| CMS-01 | P1 | 3 | In Review (current PR) | Tenant-specific page index and detail; empty state, safe escaping, optional non-destructive local sample data |
+| TEN-02 | P0 | 3 | In Review (recovered in current PR) | Page detail is filtered by both current tenant and publication status; foreign/unpublished slugs return 404 |
+| CMS-01 | P1 | 3 | In Review (recovered in current PR) | Tenant-specific page index and detail; empty state, safe escaping, optional non-destructive local sample data |
 | DEV-01 | P1 | 3 | In Progress | Compose recipe, CI suite, review instructions, isolated local test and teardown documented |
-| TEN-03 | P0 | 5 | Ready | Non-superuser staff cannot read/edit records for other businesses through admin; define assignment model; test view/add/change/delete and foreign-key choices |
+| TEN-03 | P0 | 5 | In Review (current PR) | Explicit BusinessMembership assignments; platform-wide Business/Domain/Membership administration is superuser-only; Page admin enforces Django permissions and membership, filters records and foreign-key choices; tests cover view/add/change/delete and reassignment |
 | ADMIN-01 | P1 | 3 | Backlog | Editing/publishing pages in Django admin is discoverable, consistent and tested; no unauthorized exposure |
 | CMS-02 | P1 | 3 | Backlog | Theme/template config is allowlisted, sane fallback and errors covered |
 | CMS-03 | P1 | 5 | Backlog | Normalize domains, reject conflicts, enforce coherent primary-domain rule, validate host routing |
@@ -91,10 +91,10 @@ Backlog can be mirrored into GitHub Issues/Project after repository owner select
 | TEN-02 | In Review | TEN-01 | Verify PR CI, demo two tenants and foreign-slug 404 |
 | CMS-01 | In Review | TEN-02 | Review editing experience; decide how much content must be seeded |
 | DEV-01 | In Progress | Local Docker | Document preview commands, checks, seed behavior, teardown |
-| TEN-03 | Ready | Tenant assignment decision | Implement scoped admin permissions in separate PR |
+| TEN-03 | In Review | BusinessMembership assignment | Review scoped Page admin, restricted Business/Domain admin and cross-tenant security tests |
 | WEB-01 | In Review | None | Review PR #10 and collect visual feedback |
 
-**Exit criteria:** no publicly accessible cross-tenant pages; explicitly tested unpublished content; site links stay on correct tenant during development preview; all 3 branded pages and indexed samples work locally; admins do not cross tenant boundaries after TEN-03.
+**Exit criteria:** no publicly accessible cross-tenant pages; explicitly tested unpublished content; site links stay on correct tenant during development preview; all 3 branded pages and indexed samples work locally; admins do not cross tenant boundaries when the TEN-03 PR is approved and merged.
 
 ## 8. Risk register
 
@@ -140,3 +140,17 @@ Preview: `http://127.0.0.1:8020/pages/`, `?tenant=personal-training`, or `?tenan
 - Actual delivered points and carryovers (no assumed velocity)
 - One retrospective action with owner
 - Product owner's decision on next sprint goal and production readiness
+
+## Integration recovery note — November 12, 2026
+
+PR #11 was merged into an already-merged feature branch, so its public CMS changes did not reach `main`. The active Sprint 1 PR reintroduces that commit onto current `main` and implements TEN-03 on top. Verify the PR base is `main` and confirm its files actually land on `main` before marking stories Done.
+
+## Tenant editor setup (after TEN-03 merges)
+
+1. A superuser creates a staff user in Django Admin, with an appropriate strong password and no superuser privilege.
+2. The superuser grants only the required Django Page model permissions (`view_page`, `add_page`, `change_page`, and/or `delete_page`).
+3. The superuser assigns one or more BusinessMembership records under the Businesses admin.
+4. Editors see and modify Pages only for their active assigned businesses. Business, Domain, and membership configuration remain superuser-only. Unassigned staff cannot manage Pages.
+5. Removing a membership removes that business's Page administration access.
+
+**Important:** Django Admin itself is for authenticated staff, not a public customer CMS. No tenant editor accounts are created automatically. Local sample Pages are non-production test content.

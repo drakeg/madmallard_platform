@@ -9,7 +9,7 @@
 - TEN-02 / CMS-01: tenant-scoped page list/detail, published-only data, safe escaping, sample data via explicit local command (current feature PR).
 - DEV-01: local verification and repeatable test instructions.
 - WEB-01: previously opened landing-page design PR #10, pending merge.
-- TEN-03: tenant-scoped Django admin access remains unimplemented and is the next P0 story.
+- TEN-03: scoped Django admin implementation is now in review, with BusinessMembership and security tests.
 
 ## Acceptance checklist
 
@@ -17,10 +17,10 @@
 - [x] Unpublished and other-tenant page detail requests return 404 in automated tests.
 - [x] Public HTML content is escaped by default.
 - [x] Local preview selector is retained across page navigation.
-- [x] Django tests pass in connected local Compose preview (12 tests on 2026-11-12).
+- [x] Django tests pass in connected local Compose preview (20 tests on 2026-11-12; verify again after Django 6 rebuild).
 - [x] Sample pages seeded for three brands via opt-in non-destructive command.
 - [ ] Current PR checks green in GitHub.
-- [ ] Non-superuser admin cross-tenant access prevented and tested (TEN-03).
+- [x] Non-superuser admin cross-tenant access prevented and tested locally (TEN-03); PR review pending.
 - [ ] Product owner accepts feature PR(s).
 - [ ] Sprint review and retrospective completed.
 
@@ -44,3 +44,7 @@ Examples are placeholder content for review, not a claim that these are real pub
 - What slowed delivery:
 - One measurable process improvement:
 - Next sprint capacity from actual completed points:
+
+## Integration and security update
+
+PR #11 was merged to a feature branch after that branch was already merged into main. This feature PR restores TEN-02/CMS-01 and introduces TEN-03 directly on main. Business memberships allow one or more assigned businesses for each staff editor. Cross-tenant page editing is blocked, and business/domain configuration is reserved for superusers. No existing staff accounts are granted permissions by this migration.
