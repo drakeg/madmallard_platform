@@ -1,5 +1,8 @@
 # Mad Mallard Platform
 
+[![License](https://img.shields.io/github/license/drakeg/madmallard_platform)](https://github.com/drakeg/madmallard_platform/blob/main/LICENSE)
+
+
 Low-cost AWS bootstrap for the Mad Mallard multi-tenant business platform.
 
 This project is designed to start cheap on a single EC2 instance while keeping a migration path toward managed services later.
